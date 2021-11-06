@@ -1,36 +1,34 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class MainTest1193 {
-    public static void main(String[] args){
-        int x = 1;
-        int y = 1;
-        int place = 0;
-        int sum = 0;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
         int line = 0;
-
-        Scanner scanner = new Scanner(System.in);
-        place = scanner.nextInt();
-
-        if (place == 1){
-            System.out.println(1 + "/" + 1);
-            return;
-        }
-
-        while(place > sum){
-            sum += line;
+        int count = 0;
+        while (true) {
+            for (int i = 0; i < line + 1; i++) {
+                count++;
+            }
             line++;
+            if (count >= N)
+                break;
         }
-        line -= 1;
-        if (place % 2 == 0){
-            x = line;
-            y = (line + 1) - x;
-        }
-
-        else{
-            y = line;
-            x = (line + 1) - y;
+        int sum = 0;
+        for (int i = 0; i < line; i++) {
+            sum += i;
         }
 
-        System.out.println(x+ "/"+y);
+        int place = N - sum;
+        if (line % 2 == 0)
+            System.out.println(place + "/" + (line + 1 - place));
+        else
+            System.out.println((line + 1 - place) + "/" + place);
+
     }
 }
